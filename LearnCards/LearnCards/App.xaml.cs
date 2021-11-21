@@ -13,8 +13,6 @@ namespace LearnCards
         {
             Singleton.Init();
             InitializeComponent();
-            //Singleton.Storage.AddCollection(new Models.Collection() { Name = "some", Id = Singleton.Storage.generateId()});
-            var cols = Singleton.Storage.Collections;
             MainPage = new AppShell();
         }
 

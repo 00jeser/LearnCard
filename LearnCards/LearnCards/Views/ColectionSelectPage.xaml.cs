@@ -15,6 +15,7 @@ namespace LearnCards.Views
     {
         public ColectionSelectPage()
         {
+            
             InitializeComponent();
         }
     }
