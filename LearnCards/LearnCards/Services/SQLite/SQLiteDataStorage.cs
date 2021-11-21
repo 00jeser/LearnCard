@@ -103,7 +103,7 @@ namespace LearnCards.Services.SQLite
             int id = int.MinValue;
             foreach (var col in collections)
             {
-                foreach (var card in col.Cards.Keys)
+                foreach (var card in col.Cards?.Keys)
                 {
                     if (id == card.id)
                         id++;
