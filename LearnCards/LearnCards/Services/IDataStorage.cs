@@ -8,11 +8,11 @@ namespace LearnCards.Services
 {
     public interface IDataStorage
     {
-        List<Collection> Collections { get; }
+        System.Collections.ObjectModel.ObservableCollection<Collection> Collections { get; }
 
         Collection GetCollectionById(int id);
-        List<Collection> GetCollectionsByName(string name);
-        List<Collection> GetCollections();
+        System.Collections.ObjectModel.ObservableCollection<Collection> GetCollectionsByName(string name);
+        System.Collections.ObjectModel.ObservableCollection<Collection> GetCollections();
 
         Card GetCardById(Collection collection, int id);
         List<Card> GetCards(Collection collection);
@@ -29,6 +29,9 @@ namespace LearnCards.Services
         void AddCard(Collection collection, Card card);
 
         int generateId();
+
+        void SaveCard(Collection collection, Card card);
+        void SaveCardsInCollectionCollection(Collection collection);
 
     }
 

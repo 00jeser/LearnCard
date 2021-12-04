@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LearnCards.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,12 @@ namespace LearnCards.Views
         public CollectionsListPage()
         {
             InitializeComponent();
+            BindingContext = Resources["vm"];
+        }
+        protected override bool OnBackButtonPressed()
+        {
+            (BindingContext as CollectionsListViewModel).Back();
+            return true;
         }
     }
 }

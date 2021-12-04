@@ -15,8 +15,13 @@ namespace LearnCards.Views
     {
         public ColectionSelectPage()
         {
-            
             InitializeComponent();
+            BindingContext = Resources["vm"];
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            //((ViewModels.CollectionSelectViewModel)BindingContext).OpenCollection.Execute((sender as Frame).);
         }
     }
 }

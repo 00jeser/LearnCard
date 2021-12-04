@@ -9,38 +9,20 @@ using Xamarin.Forms;
 
 namespace LearnCards.ViewModels
 {
-    public class CollectionSelectViewModel : INotifyPropertyChanged
+    public class CollectionSelectViewModel : ViewModelBase
     {
         private ObservableCollection<Models.Collection> collections;
         public ObservableCollection<Models.Collection> Collections { get => collections; set { collections = value; OnPropertyChanged(); } }
 
-
-        private Command add;
-        public Command Add { get => add; set { add = value; OnPropertyChanged(); } }
+        private Command open;
+        public Command OpenCollection { get => open; set { open = value; OnPropertyChanged(); } }
 
         public CollectionSelectViewModel()
         {
-            Collections = new ObservableCollection<Models.Collection>(Singleton.Storage.Collections);
-            Add = new Command(() =>
-            {
-                Models.Collection c = new Models.Collection() 
-                {
-                    Id = Singleton.Storage.generateId(),
-                    Name = "efefwsedfw", 
-                    Cards = new Dictionary<Models.Card, int>() 
-                };
-                Singleton.Storage.AddCollection(c);
-                Collections.Add(c);
+            OpenCollection = new Command<Models.Collection>((Models.Collection collection) => {
+                Shell.Current.GoToAsync($"//Learn?id={collection.Id}");
             });
+            Collections = Singleton.Storage.Collections;
         }
-
-
-
-
-        public void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

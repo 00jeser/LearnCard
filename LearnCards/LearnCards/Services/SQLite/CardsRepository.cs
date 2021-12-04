@@ -28,17 +28,14 @@ namespace LearnCards.Services.SQLite
         {
             return database.Delete<SQLiteCard>(id);
         }
+        public int InsertItem(SQLiteCard item)
+        {
+            return database.Insert(item);
+        }
         public int SaveItem(SQLiteCard item)
         {
-            if (item.id != 0)
-            {
-                database.Update(item);
-                return item.id;
-            }
-            else
-            {
-                return database.Insert(item);
-            }
+            database.Update(item);
+            return item.id;
 
         }
     }

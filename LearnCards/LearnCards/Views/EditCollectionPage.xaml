@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:vm="clr-namespace:LearnCards.ViewModels"
+             x:Class="LearnCards.Views.EditCollectionPage"
+             BackgroundColor="{AppThemeBinding Light=white, Dark=gray}" x:Name="page">
+    <Shell.TitleView>
+        <Label Text="{Binding Collection.Name}" FontSize="17" VerticalTextAlignment="Center" VerticalOptions="Center" TextColor="{AppThemeBinding Light=black, Dark=white}"/>
+    </Shell.TitleView>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}"
+                            IconOverride="back.png" />
+    </Shell.BackButtonBehavior>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout>
+                <Button Text="+" Command="{Binding DoAddShow}"/>
+                <CollectionView ItemsSource="{Binding Cards}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout HeightRequest="80">
+                                <SwipeView>
+                                    <Grid Padding="10" HeightRequest="60">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="{Binding Field1}" HorizontalOptions="Fill" VerticalOptions="Fill" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                        <Label Text="{Binding Field2}" HorizontalOptions="Fill" VerticalOptions="Fill" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1"/>
+                                    </Grid>
+                                    <SwipeView.RightItems>
+                                        <SwipeItem Text="Удалить" BackgroundColor="red" CommandParameter="{Binding}" Command="{Binding BindingContext.Delete, Source={x:Reference page}}"/>
+                                    </SwipeView.RightItems>
+                                </SwipeView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+            <Grid IsVisible="{Binding AddShow}" BackgroundColor="#e000">
+                <StackLayout>
+                    <Label Text="Добавить карточку"/>
+                    <Label Text="Поле 1"/>
+                    <Entry Text="{Binding InputField1}"/>
+                    <Label Text="Поле 2"/>
+                    <Entry Text="{Binding InputField2}"/>
+                    <Button Text="Добавить" Command="{Binding Add}"/>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

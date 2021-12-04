@@ -13,25 +13,25 @@ namespace LearnCards.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     [QueryProperty(nameof(Id), "id")]
-    public partial class LearnPage : ContentPage
+    public partial class EditCollectionPage : ContentPage
     {
-        LearnViewModel viewModel;
         public string Id
         {
             set
             {
-                viewModel = new LearnViewModel(int.Parse(value));
-                BindingContext = viewModel;
+                BindingContext = new CollectionEditViewModel(Singleton.Storage.GetCollectionById(int.Parse(value)));
             }
         }
-        public LearnPage()
+        public EditCollectionPage()
         {
             InitializeComponent();
         }
-
         protected override bool OnBackButtonPressed()
         {
-            Shell.Current.GoToAsync("//LearnSelect");
+            if (((CollectionEditViewModel)BindingContext).AddShow)
+                ((CollectionEditViewModel)BindingContext).AddShow = false;
+            else
+                Shell.Current.GoToAsync("//CollectionSelect");
             return true;
         }
     }

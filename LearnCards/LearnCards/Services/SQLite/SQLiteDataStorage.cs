@@ -15,12 +15,12 @@ namespace LearnCards.Services.SQLite
         {
             _collectionsRepository = new CollectionsRepository();
             _cardsRepository = new CardsRepository();
-            collections = _collectionsRepository.GetItems().Select(x => x.GetCollection()).ToList();
+            collections = new System.Collections.ObjectModel.ObservableCollection<Collection>(_collectionsRepository.GetItems().Select(x => x.GetCollection()).ToList());
             foreach (var card in _cardsRepository.GetItems())
             {
                 foreach (var col in collections)
                 {
-                    if (col.Id == card.id)
+                    if (col.Id == card.CollectionID)
                     {
                         col.Cards[card.GetCard()] = card.count;
                     }
@@ -28,13 +28,13 @@ namespace LearnCards.Services.SQLite
             }
         }
 
-        private List<Collection> collections;
-        public List<Collection> Collections => collections;
+        private System.Collections.ObjectModel.ObservableCollection<Collection> collections;
+        public System.Collections.ObjectModel.ObservableCollection<Collection> Collections => collections;
 
         public void AddCard(Collection collection, Card card)
         {
             collection.Cards[card] = 0;
-            _cardsRepository.SaveItem(new Models.SQLiteDecorators.SQLiteCard()
+            _cardsRepository.InsertItem(new Models.SQLiteDecorators.SQLiteCard()
             {
                 CollectionID = collection.Id,
                 count = 0,
@@ -42,6 +42,8 @@ namespace LearnCards.Services.SQLite
                 Field2 = card.Field2,
                 id = card.id,
             });
+            Collections.Add(new Collection());
+            Collections.Remove(Collections.Last());
         }
 
         public void AddCollection(Collection collection)
@@ -68,8 +70,9 @@ namespace LearnCards.Services.SQLite
 
         public void DeleteCollectionsByName(string name)
         {
-            collections.Remove(collections.Where(x => x.Name == name).FirstOrDefault());
-            _collectionsRepository.DeleteItem(collections.Where(x => x.Name == name).FirstOrDefault().Id);
+            var c = collections.Where(x => x.Name == name).FirstOrDefault();
+            collections.Remove(c);
+            _collectionsRepository.DeleteItem(c.Id);
         }
 
         public Card GetCardById(Collection collection, int id)
@@ -87,31 +90,59 @@ namespace LearnCards.Services.SQLite
             return collections.First(x => x.Id == id);
         }
 
-        public List<Collection> GetCollections()
+        public System.Collections.ObjectModel.ObservableCollection<Collection> GetCollections()
         {
             return collections;
         }
 
 
-        public List<Collection> GetCollectionsByName(string name)
+        public System.Collections.ObjectModel.ObservableCollection<Collection> GetCollectionsByName(string name)
         {
-            return collections.Where(x => x.Name == name).ToList();
+            return new System.Collections.ObjectModel.ObservableCollection<Collection>(collections.Where(x => x.Name == name).ToList());
         }
 
         public int generateId()
         {
             int id = int.MinValue;
+            List<int> ids = new List<int>();
             foreach (var col in collections)
             {
+                ids.Add(col.Id);
                 foreach (var card in col.Cards?.Keys)
                 {
-                    if (id == card.id)
-                        id++;
+                    ids.Add(card.id);
                 }
-                if (id == col.Id)
-                    id++;
+            }
+            while (ids.Contains(id))
+            {
+                id++;
             }
             return id;
+        }
+
+        public void SaveCard(Collection collection, Card card)
+        {
+            _cardsRepository.SaveItem(new Models.SQLiteDecorators.SQLiteCard()
+            {
+                CollectionID = collection.Id,
+                count = collection.Cards[card],
+                Field1 = card.Field1,
+                Field2 = card.Field2,
+                id = card.id
+            });
+        }
+
+        public void SaveCardsInCollectionCollection(Collection collection)
+        {
+            foreach(var card in collection.Cards.Keys)
+                _cardsRepository.SaveItem(new Models.SQLiteDecorators.SQLiteCard()
+                {
+                    CollectionID = collection.Id,
+                    count = collection.Cards[card],
+                    Field1 = card.Field1,
+                    Field2 = card.Field2,
+                    id = card.id
+                });
         }
     }
 }

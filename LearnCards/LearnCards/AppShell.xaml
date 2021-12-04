@@ -30,13 +30,16 @@
     </Shell.Resources>
 
     <TabBar>
-        <ShellContent Title="Учить" Icon="icon_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:ColectionSelectPage}" />
-        <ShellContent Title="Коллекции" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:CollectionsListPage}" />
+        <ShellContent Title="Учить" Icon="icon_about.png" Route="LearnSelect" ContentTemplate="{DataTemplate local:ColectionSelectPage}" />
+        <ShellContent Title="Коллекции" Icon="icon_feed.png" Route="CollectionSelect" ContentTemplate="{DataTemplate local:CollectionsListPage}" />
     </TabBar>
 
     
     <TabBar>
-        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LearnPage}" />
+        <ShellContent Route="Learn" ContentTemplate="{DataTemplate local:LearnPage}" />
+    </TabBar>
+    <TabBar>
+        <ShellContent Route="Edit" ContentTemplate="{DataTemplate local:EditCollectionPage}" />
     </TabBar>
 
 
