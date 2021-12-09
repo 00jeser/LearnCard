@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:vm="clr-namespace:LearnCards.ViewModels"
-             x:Class="LearnCards.Views.EditCollectionPage"
-             BackgroundColor="{AppThemeBinding Light=white, Dark=gray}" x:Name="page">
+             x:Class="LearnCards.Views.EditCollectionPage" x:Name="page"
+             Visual="Material">
     <Shell.TitleView>
         <Label Text="{Binding Collection.Name}" FontSize="17" VerticalTextAlignment="Center" VerticalOptions="Center" TextColor="{AppThemeBinding Light=black, Dark=white}"/>
     </Shell.TitleView>
@@ -40,10 +40,8 @@
             <Grid IsVisible="{Binding AddShow}" BackgroundColor="#e000">
                 <StackLayout>
                     <Label Text="Добавить карточку"/>
-                    <Label Text="Поле 1"/>
-                    <Entry Text="{Binding InputField1}"/>
-                    <Label Text="Поле 2"/>
-                    <Entry Text="{Binding InputField2}"/>
+                    <Entry Placeholder="Поле 1" Text="{Binding InputField1}"/>
+                    <Entry Placeholder="Поле 2" Text="{Binding InputField2}"/>
                     <Button Text="Добавить" Command="{Binding Add}"/>
                 </StackLayout>
             </Grid>

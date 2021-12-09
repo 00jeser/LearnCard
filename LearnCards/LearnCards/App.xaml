@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:LearnCards.Controls"
              x:Class="LearnCards.App">
     <!--
         Define global resources and styles here, that apply to all pages in your app.
@@ -29,7 +29,18 @@
                 </Setter>
             </Style>
             <Style TargetType="Label">
-                <Setter Property="TextColor" Value="{AppThemeBinding Dark=white, Light=black,Default=gray}"></Setter>
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark=white, Light=black, Default=gray}"></Setter>
+            </Style>
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+                <Setter Property="Background" Value="{AppThemeBinding Dark=#111, Light=#EEE}"></Setter>
+                <Setter Property="Visual" Value="Material"/>
+            </Style>
+            <Style TargetType="Entry" ApplyToDerivedTypes="True">
+                <Setter Property="PlaceholderColor" Value="{AppThemeBinding Dark=#EFFF, Default=#E000}"/>
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark=white, Light=black, Default=gray}"/>
+            </Style>
+            <Style TargetType="controls:AutoSizedLabel">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark=white, Light=black, Default=gray}"></Setter>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

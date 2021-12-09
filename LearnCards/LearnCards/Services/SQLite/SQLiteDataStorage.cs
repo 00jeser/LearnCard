@@ -105,14 +105,18 @@ namespace LearnCards.Services.SQLite
         {
             int id = int.MinValue;
             List<int> ids = new List<int>();
-            foreach (var col in collections)
-            {
-                ids.Add(col.Id);
-                foreach (var card in col.Cards?.Keys)
-                {
-                    ids.Add(card.id);
-                }
-            }
+            //foreach (var col in collections)
+            //{
+            //    ids.Add(col.Id);
+            //    foreach (var card in col.Cards?.Keys)
+            //    {
+            //        ids.Add(card.id);
+            //    }
+            //}
+            foreach (var card in _cardsRepository.GetItems())
+                ids.Add(card.id);
+            foreach (var collection in _collectionsRepository.GetItems())
+                ids.Add(collection.Id);
             while (ids.Contains(id))
             {
                 id++;

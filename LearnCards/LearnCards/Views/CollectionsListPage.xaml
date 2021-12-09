@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:LearnCards.ViewModels"
-             x:Class="LearnCards.Views.CollectionsListPage"
-             BackgroundColor="{AppThemeBinding Light=white, Dark=gray}">
+             x:Class="LearnCards.Views.CollectionsListPage">
     <ContentPage.Resources>
         <viewmodels:CollectionsListViewModel x:Key="vm"/>
     </ContentPage.Resources>
@@ -20,14 +19,7 @@
                 <FlexLayout Wrap="Wrap" JustifyContent="Start" AlignContent="Start" BindableLayout.ItemsSource="{Binding Collections}" Margin="2">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Frame
-                           HeightRequest="120" WidthRequest="110"
-                           CornerRadius="6"
-                           BorderColor="{AppThemeBinding Light=#DDD, Dark=#000}"
-                           BackgroundColor="{AppThemeBinding Light=#EFEFEF, Dark=#303030}"
-                           Padding="10"
-                           Margin="2"
-                           >
+                            <Frame HeightRequest="120" WidthRequest="110" CornerRadius="6" BorderColor="{AppThemeBinding Light=#DDD, Dark=#000}" BackgroundColor="{AppThemeBinding Light=#EFEFEF, Dark=#303030}" Padding="10" Margin="2">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer CommandParameter="{Binding}" Command="{Binding OpenCollection, Source={StaticResource vm}}"/>
                                 </Frame.GestureRecognizers>
@@ -43,14 +35,14 @@
             <Grid BackgroundColor="#c000" IsVisible="{Binding ShowMinus}">
                 <StackLayout>
                     <Label Text="Удалить коллекцию"/>
-                    <Picker ItemsSource="{Binding NamesList}" SelectedIndex="{Binding MinusIndex}"/>
+                    <Picker TextColor="{AppThemeBinding Dark=white, Default=black}" ItemsSource="{Binding NamesList}" SelectedIndex="{Binding MinusIndex}"/>
                     <Button Text="Удалить" Command="{Binding DoMinus}"/>
                 </StackLayout>
             </Grid>
             <Grid BackgroundColor="#c000" IsVisible="{Binding AddShow}">
                 <StackLayout>
                     <Label Text="Добавить коллекцию"/>
-                    <Entry Text="{Binding AddName}"/>
+                    <Entry Placeholder="Название коллекции" Text="{Binding AddName}"/>
                     <Button Text="Добавить" Command="{Binding DoAdd}"/>
                 </StackLayout>
             </Grid>

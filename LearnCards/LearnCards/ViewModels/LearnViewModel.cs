@@ -19,6 +19,9 @@ namespace LearnCards.ViewModels
         public Command Right { get; set; }
         public Command Left { get; set; }
 
+
+        private int done;
+        private int max;
         public LearnViewModel(int id)
         {
             Collection = Singleton.Storage.GetCollectionById(id);
@@ -38,14 +41,20 @@ namespace LearnCards.ViewModels
                 TempCards.Remove(c);
                 Collection.Cards[c] += 1;
                 Singleton.Storage.SaveCard(Collection, c);
+                done++;
+                max++;
                 if (TempCards.Count == 0)
-                    Shell.Current.GoToAsync($"//Learn?id={id}");
+                    if (NeedUpdateAmo())
+                        Shell.Current.GoToAsync($"//Done?id={id}");
+                    else
+                        Shell.Current.GoToAsync($"//Stat?id={id}&done={done}&max={max}");
             });
             Left = new Command<Models.Card>((Models.Card c) =>
             {
                 TempCards.Remove(c);
+                max++;
                 if (TempCards.Count == 0)
-                    Shell.Current.GoToAsync($"//Learn?id={id}");
+                    Shell.Current.GoToAsync($"//Stat?id={id}&done={done}&max={max}");
             });
         }
 

@@ -59,6 +59,8 @@ namespace LearnCards.ViewModels
                 Singleton.Storage.AddCard(Collection, card);
                 OnPropertyChanged(nameof(Cards));
                 AddShow = false;
+                InputField1 = String.Empty;
+                InputField2 = String.Empty;
             });
 
         }

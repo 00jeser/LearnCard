@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using ProgressRingControl.Forms.Plugin.iOS;
 using UIKit;
 
 namespace LearnCards.iOS
@@ -23,6 +24,8 @@ namespace LearnCards.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            global::Xamarin.Forms.FormsMaterial.Init();
+            ProgressRingRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
