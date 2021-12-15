@@ -13,8 +13,8 @@ namespace LearnCards.Services
         public static SQLiteConnection SQLiteDatabase;
         public static void Init()
         {
-            SQLiteDatabase = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "collections.db"), SQLiteOpenFlags.Create | SQLiteOpenFlags.FullMutex | SQLiteOpenFlags.ReadWrite);
-            Storage = new SQLiteDataStorage();
+            //SQLiteDatabase = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "collections.db"), SQLiteOpenFlags.Create | SQLiteOpenFlags.FullMutex | SQLiteOpenFlags.ReadWrite);
+            Storage = new JSONDataStorage();
         }
     }
 }
