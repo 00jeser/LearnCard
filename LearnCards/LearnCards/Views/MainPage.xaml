@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:extensions="clr-namespace:LearnCards.Extensions" xmlns:controls="clr-namespace:LearnCards.Controls"  xmlns:vm="clr-namespace:LearnCards.ViewModels" xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="LearnCards.Views.MainPage">
+    <Shell.TitleView>
+        <Label Text="Список коллекций" FontSize="17" VerticalTextAlignment="Center" VerticalOptions="Center" TextColor="{AppThemeBinding Light=black, Dark=white}"/>
+    </Shell.TitleView>
+
+    <ContentPage.ToolbarItems>
+        <controls:HidableToolbarItem IsVisible="{Binding ShowDelButton}" 
+                                     IconImageSource="{AppThemeBinding Dark={extensions:ImageResourceExtension LearnCards.Images.trash-can-white.png}, Default={extensions:ImageResourceExtension LearnCards.Images.trash-can-black.png}}"
+                                     Command="{Binding DoDelete}"
+                                     />
+
+        <ToolbarItem Text="+" Command="{Binding DoShowAdd}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <CollectionView SelectionChangedCommand="{Binding SelectionChange}" SelectionChanged="CardsCollection_SelectionChanged" SelectedItem="{Binding SelectedCollection}" x:Name="CardsCollection" ItemsLayout="VerticalGrid, 3" ItemsSource="{Binding Collections}" SelectionMode="{Binding SelectionMode}" SelectedItems="{Binding SelectedCollections}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame HeightRequest="100"
+                              BorderColor="{AppThemeBinding Dark=#333, Light=#AAA}" CornerRadius="5" Padding="0">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#FFF, Dark=#303030}"/>
+                                            <Setter Property="BorderColor" Value="#00f"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#FFF, Dark=#303030}"/>
+                                            <Setter Property="BorderColor" Value="{AppThemeBinding Dark=#333, Light=#AAA}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid HorizontalOptions="Fill" VerticalOptions="Fill"
+                              xct:TouchEffect.LongPressCommand="{Binding LongPressCommand, Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}}}"
+                              xct:TouchEffect.LongPressCommandParameter="{Binding}">
+                                <controls:AutoSizedLabel Margin="15" HorizontalOptions="Fill" VerticalOptions="Fill" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{Binding Name}"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Grid BackgroundColor="#c000" IsVisible="{Binding AddShow}">
+                <StackLayout>
+                    <Label Text="Добавить коллекцию"/>
+                    <Entry Placeholder="Название коллекции" Text="{Binding AddName}"/>
+                    <Button Text="Добавить" Command="{Binding DoAdd}"/>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

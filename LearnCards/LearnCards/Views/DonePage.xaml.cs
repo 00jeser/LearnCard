@@ -28,7 +28,7 @@ namespace LearnCards.Views
 
         private void Button_Clicked_1(object sender, EventArgs e)
         {
-            Shell.Current.GoToAsync($"//LearnSelect");
+            Shell.Current.GoToAsync($"//Main");
         }
     }
 }

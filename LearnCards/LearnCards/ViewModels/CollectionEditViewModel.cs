@@ -25,6 +25,8 @@ namespace LearnCards.ViewModels
         private Command doAddShow;
         public Command DoAddShow { get { return doAddShow; } set { doAddShow = value; OnPropertyChanged(); } }
 
+        public Command DoLearn { get; set; }
+
         private bool addShow;
         public bool AddShow { get { return addShow; } set { addShow = value; OnPropertyChanged(); } }
 
@@ -38,6 +40,10 @@ namespace LearnCards.ViewModels
         public CollectionEditViewModel(Models.Collection c)
         {
             Collection = c;
+            DoLearn = new Command(() =>
+            {
+                Shell.Current.GoToAsync($"//Learn?id={c.Id}");
+            });
             Delete = new Command<Models.Card>((Models.Card card) =>
             {
                 //Collection.Cards.Remove(card);

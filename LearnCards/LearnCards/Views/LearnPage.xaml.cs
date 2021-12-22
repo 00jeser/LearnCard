@@ -31,7 +31,7 @@ namespace LearnCards.Views
 
         protected override bool OnBackButtonPressed()
         {
-            Shell.Current.GoToAsync("//LearnSelect");
+            Shell.Current.GoToAsync("//Main");
             return true;
         }
     }

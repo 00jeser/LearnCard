@@ -31,7 +31,7 @@ namespace LearnCards.Views
             if (((CollectionEditViewModel)BindingContext).AddShow)
                 ((CollectionEditViewModel)BindingContext).AddShow = false;
             else
-                Shell.Current.GoToAsync("//CollectionSelect");
+                Shell.Current.GoToAsync("//Main");
             return true;
         }
     }

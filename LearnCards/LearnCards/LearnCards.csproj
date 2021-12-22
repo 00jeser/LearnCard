@@ -7,6 +7,13 @@
 
   <ItemGroup>
     <None Remove="back.png" />
+    <None Remove="Images\trash-can-black.png" />
+    <None Remove="Images\trash-can-white.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Images\trash-can-black.png" />
+    <EmbeddedResource Include="Images\trash-can-white.png" />
   </ItemGroup>
 
   <ItemGroup>

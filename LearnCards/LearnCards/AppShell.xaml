@@ -23,8 +23,7 @@
     </Shell.Resources>
 
     <TabBar>
-        <ShellContent Title="Учить" Icon="icon_about.png" Route="LearnSelect" ContentTemplate="{DataTemplate local:ColectionSelectPage}" />
-        <ShellContent Title="Коллекции" Icon="icon_feed.png" Route="CollectionSelect" ContentTemplate="{DataTemplate local:CollectionsListPage}" />
+        <ShellContent Route="Main" ContentTemplate="{DataTemplate local:MainPage}" />
     </TabBar>
 
     <TabBar>

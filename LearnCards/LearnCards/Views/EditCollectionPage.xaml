@@ -35,8 +35,12 @@
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
+                    <CollectionView.Footer>
+                        <BoxView HeightRequest="80"/>
+                    </CollectionView.Footer>
                 </CollectionView>
             </StackLayout>
+            <Button Text="Учить" VerticalOptions="End" Margin="20" FontSize="23" Command="{Binding DoLearn}"/>
             <Grid IsVisible="{Binding AddShow}" BackgroundColor="#e000">
                 <StackLayout>
                     <Label Text="Добавить карточку"/>
