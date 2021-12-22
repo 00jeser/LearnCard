@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnCards.Android", "Learn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnCards.iOS", "LearnCards\LearnCards.iOS\LearnCards.iOS.csproj", "{B60D9678-B53E-4A59-ADF8-B81124F806C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnCards", "LearnCards\LearnCards\LearnCards.csproj", "{160630F9-B323-4A8D-AF5B-5BD03022D22F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearnCards", "LearnCards\LearnCards\LearnCards.csproj", "{160630F9-B323-4A8D-AF5B-5BD03022D22F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LearnCards.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,10 +16,15 @@ namespace LearnCards.Views
     [QueryProperty(nameof(Done), "done")]
     public partial class StatisticsPage : ContentPage
     {
-        public string id 
+        private string _id;
+        public string id
         {
-            set;
-            get; 
+            set
+            {
+                _id = value;
+                nameLabel.Text = Singleton.Storage.GetCollectionById(int.Parse(value)).Name;
+            }
+            get => _id;
         }
 
         private string max;
@@ -28,7 +34,10 @@ namespace LearnCards.Views
             {
                 max = value;
                 if (!string.IsNullOrWhiteSpace(done))
+                {
                     ring.Progress = double.Parse(done) / double.Parse(max);
+                    lbl.Text = $"{done}/{max}";
+                }
             }
         }
 
@@ -39,7 +48,10 @@ namespace LearnCards.Views
             {
                 done = value;
                 if (!string.IsNullOrWhiteSpace(max))
+                {
                     ring.Progress = double.Parse(done) / double.Parse(max);
+                    lbl.Text = $"{done}/{max}";
+                }
             }
         }
         public StatisticsPage()

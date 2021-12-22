@@ -4,13 +4,6 @@
        xmlns:local="clr-namespace:LearnCards.Views"
        Title="LearnCards"
        x:Class="LearnCards.AppShell">
-
-    <!--
-        The overall app visual hierarchy is defined here, along with navigation.
-    
-        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
-    -->
-
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
@@ -46,6 +39,4 @@
     <TabBar>
         <ShellContent Route="Done" ContentTemplate="{DataTemplate local:DonePage}" />
     </TabBar>
-
-
 </Shell>

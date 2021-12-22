@@ -1,16 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:plugin="clr-namespace:ProgressRingControl.Forms.Plugin;assembly=ProgressRing.Forms.Plugin"
-             x:Class="LearnCards.Views.StatisticsPage">
+             xmlns:plugin="clr-namespace:ProgressRingControl.Forms.Plugin;assembly=ProgressRing.Forms.Plugin" xmlns:controls="clr-namespace:LearnCards.Controls"
+             x:Class="LearnCards.Views.StatisticsPage"
+             Shell.NavBarIsVisible="False">
     <ContentPage.Content>
         <Grid HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="200" HeightRequest="300">
             <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
-            <plugin:ProgressRing ScaleX="-1" x:Name="ring" RingProgressColor="{AppThemeBinding Dark=white, Default=black}" RingBaseColor="Gray"/>
-            <Button Text="Далее" Grid.Row="1" Clicked="Button_Clicked"/>
+            <plugin:ProgressRing Grid.Row="1" ScaleX="-1" x:Name="ring" RingProgressColor="{AppThemeBinding Dark=white, Default=black}" RingBaseColor="Gray"/>
+            <Label Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" x:Name="lbl"/>
+            <controls:AutoSizedLabel HorizontalOptions="Fill" VerticalOptions="Fill" x:Name="nameLabel" HorizontalTextAlignment="Center"/>
+            <Button Text="Далее" Grid.Row="2" Clicked="Button_Clicked"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

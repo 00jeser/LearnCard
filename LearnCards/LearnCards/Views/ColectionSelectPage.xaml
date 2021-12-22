@@ -19,7 +19,7 @@
                            HeightRequest="120" WidthRequest="110"
                            CornerRadius="6"
                            BorderColor="{AppThemeBinding Light=#DDD, Dark=#000}"
-                           BackgroundColor="{AppThemeBinding Light=#EFEFEF, Dark=#303030}"
+                           BackgroundColor="{AppThemeBinding Light=#FFF, Dark=#303030}"
                            Padding="10"
                            >
                             <Frame.GestureRecognizers>

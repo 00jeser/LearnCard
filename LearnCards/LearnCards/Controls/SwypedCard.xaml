@@ -8,7 +8,7 @@
                 <PanGestureRecognizer x:Name="PanGuesture"/>
                 <TapGestureRecognizer x:Name="TapGuesture"/>
             </Grid.GestureRecognizers>
-            <Frame WidthRequest="250" HeightRequest="250" BackgroundColor="{AppThemeBinding Dark=#333, Light=#DDD, Default=#DDD}" x:Name="frame" HorizontalOptions="Center" VerticalOptions="Center">
+            <Frame WidthRequest="250" HeightRequest="250" BackgroundColor="{AppThemeBinding Dark=#333, Light=#FFF, Default=#FFF}" x:Name="frame" HorizontalOptions="Center" VerticalOptions="Center">
                 <controls:AutoSizedLabel HorizontalOptions="Fill" VerticalOptions="Fill" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" x:Name="lab" Text="dwa1"/>
             </Frame>
         </Grid>

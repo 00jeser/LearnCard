@@ -19,7 +19,7 @@
                 <FlexLayout Wrap="Wrap" JustifyContent="Start" AlignContent="Start" BindableLayout.ItemsSource="{Binding Collections}" Margin="2">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Frame HeightRequest="120" WidthRequest="110" CornerRadius="6" BorderColor="{AppThemeBinding Light=#DDD, Dark=#000}" BackgroundColor="{AppThemeBinding Light=#EFEFEF, Dark=#303030}" Padding="10" Margin="2">
+                            <Frame HeightRequest="120" WidthRequest="110" CornerRadius="6" BorderColor="{AppThemeBinding Light=#DDD, Dark=#000}" BackgroundColor="{AppThemeBinding Light=#FFF, Dark=#303030}" Padding="10" Margin="2">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer CommandParameter="{Binding}" Command="{Binding OpenCollection, Source={StaticResource vm}}"/>
                                 </Frame.GestureRecognizers>

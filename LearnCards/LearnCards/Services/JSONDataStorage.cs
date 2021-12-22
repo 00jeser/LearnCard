@@ -22,7 +22,8 @@ namespace LearnCards.Services
             }
             else
             {
-                File.Create(JSONpath);
+                //File.Create(JSONpath);
+                File.WriteAllText(JSONpath, "[]");
             }
         }
 
