@@ -9,63 +9,63 @@ using System.Linq;
 
 namespace LearnCards.Services
 {
-    public class JSONDataStorage : IDataStorage
+    public class JsonDataStorage : IDataStorage
     {
         public ObservableCollection<Collection> Collections { get; }
 
-        public JSONDataStorage()
+        public JsonDataStorage()
         {
             Collections = new ObservableCollection<Collection>();
-            if (File.Exists(JSONpath))
+            if (File.Exists(_jsoNpath))
             {
-                load();
+                Load();
             }
             else
             {
                 //File.Create(JSONpath);
-                File.WriteAllText(JSONpath, "[]");
+                File.WriteAllText(_jsoNpath, "[]");
             }
         }
 
         void IDataStorage.AddCard(Collection collection, Card card)
         {
             Collections.First(x => x.Id == collection.Id).Cards[card] = 0;
-            save();
+            Save();
         }
 
         void IDataStorage.AddCollection(Collection collection)
         {
             Collections.Add(collection);
-            save();
+            Save();
         }
 
         void IDataStorage.DeleteCardById(Collection collection, int id)
         {
             collection = Collections.First(x => x.Id == collection.Id);
-            collection.Cards.Remove(collection.Cards.Keys.First(x => x.id == id));
-            save();
+            collection.Cards.Remove(collection.Cards.Keys.First(x => x.Id == id));
+            Save();
         }
 
         void IDataStorage.DeleteCollectionById(int id)
         {
             Collections.Remove(Collections.First(x => x.Id == id));
-            save();
+            Save();
         }
 
         void IDataStorage.DeleteCollectionsByName(string name)
         {
             Collections.Remove(Collections.First(x => x.Name == name));
-            save();
+            Save();
         }
 
-        int IDataStorage.generateId()
+        int IDataStorage.GenerateId()
         {
             List<int> ids = new List<int>();
             foreach (Collection col in Collections)
             {
                 ids.Add(col.Id);
                 foreach (Card card in col.Cards.Keys)
-                    ids.Add(card.id);
+                    ids.Add(card.Id);
             }
             int id = 0;
             while (ids.Contains(id))
@@ -76,7 +76,7 @@ namespace LearnCards.Services
         Card IDataStorage.GetCardById(Collection collection, int id)
         {
             collection = Collections.First(x => x.Id == collection.Id);
-            return collection.Cards.Keys.First(x => x.id == id);
+            return collection.Cards.Keys.First(x => x.Id == id);
         }
 
         List<Card> IDataStorage.GetCards(Collection collection)
@@ -104,47 +104,47 @@ namespace LearnCards.Services
         {
             int a = collection.Cards[card];
             collection = Collections.First(x => x.Id == collection.Id);
-            collection.Cards.Remove(collection.Cards.Keys.First(x => x.id == card.id));
+            collection.Cards.Remove(collection.Cards.Keys.First(x => x.Id == card.Id));
             collection.Cards[card] = a;
-            save();
+            Save();
         }
 
         void IDataStorage.SaveCardsInCollectionCollection(Collection collection)
         {
             Collections.Remove(Collections.First(x => x.Id == collection.Id));
             Collections.Add(collection);
-            save();
+            Save();
         }
 
 
         #region saveload
-        private string JSONpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "LearnCards.json");
-        private void save()
+        private string _jsoNpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "LearnCards.json");
+        private void Save()
         {
-            List<JSONCollection> cols = new List<JSONCollection>();
+            List<JsonCollection> cols = new List<JsonCollection>();
             foreach(var col in Collections)
             {
-                List<JSONCard> cards = new List<JSONCard>();
+                List<JsonCard> cards = new List<JsonCard>();
                 foreach(var card in col.Cards.Keys)
                 {
-                    cards.Add(new JSONCard() { amo = col.Cards[card], Field1 = card.Field1, Field2 = card.Field2, id = card.id });
+                    cards.Add(new JsonCard() { Amo = col.Cards[card], Field1 = card.Field1, Field2 = card.Field2, Id = card.Id });
                 }
-                cols.Add(new JSONCollection() { Id = col.Id, Name = col.Name, Cards = cards });
+                cols.Add(new JsonCollection() { Id = col.Id, Name = col.Name, Cards = cards });
             }
-            File.WriteAllText(JSONpath, JsonConvert.SerializeObject(cols));
+            File.WriteAllText(_jsoNpath, JsonConvert.SerializeObject(cols));
         }
-        private async void load()
+        private async void Load()
         {
-            string str = File.ReadAllText(JSONpath);
+            string str = File.ReadAllText(_jsoNpath);
             Collections.Clear();
-            var cols = JsonConvert.DeserializeObject<List<JSONCollection>>(str);
+            var cols = JsonConvert.DeserializeObject<List<JsonCollection>>(str);
             foreach(var col in cols)
             {
                 Collection collection = new Collection() { Name = col.Name, Id = col.Id };
                 collection.Cards = new Dictionary<Card, int>();
                 foreach(var jcard in col.Cards)
                 {
-                    collection.Cards[new Card() { Field1 = jcard.Field1, Field2 = jcard.Field2, id = jcard.id }] = jcard.amo;
+                    collection.Cards[new Card() { Field1 = jcard.Field1, Field2 = jcard.Field2, Id = jcard.Id }] = jcard.Amo;
                 }
                 Collections.Add(collection);
             }

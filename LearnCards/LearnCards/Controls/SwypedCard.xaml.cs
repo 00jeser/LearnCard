@@ -36,7 +36,7 @@ namespace LearnCards.Controls
             typeof(string),
             typeof(SwypedCard),
             "def",
-            propertyChanging: (BindableObject bindable, object oldValue, object newValue) =>
+            propertyChanging: (bindable, oldValue, newValue) =>
             {
                 (bindable as SwypedCard).Field1 = (string)newValue;
             }
@@ -58,7 +58,7 @@ namespace LearnCards.Controls
             typeof(string),
             typeof(SwypedCard),
             "def",
-            propertyChanging: (BindableObject bindable, object oldValue, object newValue) =>
+            propertyChanging: (bindable, oldValue, newValue) =>
             {
                 (bindable as SwypedCard).Field2 = (string)newValue;
             }
@@ -79,7 +79,7 @@ namespace LearnCards.Controls
             typeof(Command),
             typeof(SwypedCard),
             null,
-            propertyChanging: (BindableObject bindable, object oldValue, object newValue) =>
+            propertyChanging: (bindable, oldValue, newValue) =>
             {
                 (bindable as SwypedCard).CommandLeft = (Command)newValue;
             }
@@ -101,7 +101,7 @@ namespace LearnCards.Controls
             typeof(Command),
             typeof(SwypedCard),
             null,
-            propertyChanging: (BindableObject bindable, object oldValue, object newValue) =>
+            propertyChanging: (bindable, oldValue, newValue) =>
             {
                 (bindable as SwypedCard).CommandRight = (Command)newValue;
             }
@@ -122,7 +122,7 @@ namespace LearnCards.Controls
             typeof(object),
             typeof(SwypedCard),
             null,
-            propertyChanging: (BindableObject bindable, object oldValue, object newValue) =>
+            propertyChanging: (bindable, oldValue, newValue) =>
             {
                 (bindable as SwypedCard).CommandParameter = newValue;
             }
@@ -136,18 +136,18 @@ namespace LearnCards.Controls
             frame.RotationY = 0;
         }
 
-        double LastX = 0;
+        double _lastX = 0;
         private async void PanGuesture_PanUpdated(object sender, PanUpdatedEventArgs e)
         {
             frame.TranslationX = e.TotalX * 1.3;
             frame.TranslationY = Math.Abs(e.TotalX / 5);
             frame.Rotation = e.TotalX / 20;
             if (e.StatusType == GestureStatus.Completed)
-                if (LastX > 100)
+                if (_lastX > 100)
                 {
-                    frame.TranslationX = LastX * 1.3;
-                    frame.TranslationY = Math.Abs(LastX / 5);
-                    frame.Rotation = LastX / 20;
+                    frame.TranslationX = _lastX * 1.3;
+                    frame.TranslationY = Math.Abs(_lastX / 5);
+                    frame.Rotation = _lastX / 20;
 
                     frame.TranslateTo(500, frame.TranslationY + 400);
                     await frame.RotateTo(90);
@@ -156,11 +156,11 @@ namespace LearnCards.Controls
                     frame.TranslationX = 0;
                     frame.Rotation = 0;
                 }
-                else if (LastX < -100)
+                else if (_lastX < -100)
                 {
-                    frame.TranslationX = LastX * 1.3;
-                    frame.TranslationY = Math.Abs(LastX / 5);
-                    frame.Rotation = LastX / 20;
+                    frame.TranslationX = _lastX * 1.3;
+                    frame.TranslationY = Math.Abs(_lastX / 5);
+                    frame.Rotation = _lastX / 20;
 
                     frame.TranslateTo(-500, frame.TranslationY + 400);
                     await frame.RotateTo(-90);
@@ -169,7 +169,7 @@ namespace LearnCards.Controls
                     frame.TranslationX = 0;
                     frame.Rotation = 0;
                 }
-            LastX = e.TotalX;
+            _lastX = e.TotalX;
         }
     }
 }

@@ -9,33 +9,33 @@ namespace LearnCards.Services.SQLite
 {
     public class CardsRepository
     {
-        SQLiteConnection database;
+        SQLiteConnection _database;
         public CardsRepository()
         {
-            database = Singleton.SQLiteDatabase;
-            database.CreateTable<SQLiteCard>();
+            _database = Singleton.SqLiteDatabase;
+            _database.CreateTable<SqLiteCard>();
         }
 
-        public IEnumerable<SQLiteCard> GetItems()
+        public IEnumerable<SqLiteCard> GetItems()
         {
-            return database.Table<SQLiteCard>().ToList();
+            return _database.Table<SqLiteCard>().ToList();
         }
-        public SQLiteCard GetItem(int id)
+        public SqLiteCard GetItem(int id)
         {
-            return database.Get<SQLiteCard>(id);
+            return _database.Get<SqLiteCard>(id);
         }
         public int DeleteItem(int id)
         {
-            return database.Delete<SQLiteCard>(id);
+            return _database.Delete<SqLiteCard>(id);
         }
-        public int InsertItem(SQLiteCard item)
+        public int InsertItem(SqLiteCard item)
         {
-            return database.Insert(item);
+            return _database.Insert(item);
         }
-        public int SaveItem(SQLiteCard item)
+        public int SaveItem(SqLiteCard item)
         {
-            database.Update(item);
-            return item.id;
+            _database.Update(item);
+            return item.Id;
 
         }
     }

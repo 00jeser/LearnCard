@@ -11,15 +11,15 @@ namespace LearnCards.ViewModels
 {
     public class CollectionSelectViewModel : ViewModelBase
     {
-        private ObservableCollection<Models.Collection> collections;
-        public ObservableCollection<Models.Collection> Collections { get => collections; set { collections = value; OnPropertyChanged(); } }
+        private ObservableCollection<Models.Collection> _collections;
+        public ObservableCollection<Models.Collection> Collections { get => _collections; set { _collections = value; OnPropertyChanged(); } }
 
-        private Command open;
-        public Command OpenCollection { get => open; set { open = value; OnPropertyChanged(); } }
+        private Command _open;
+        public Command OpenCollection { get => _open; set { _open = value; OnPropertyChanged(); } }
 
         public CollectionSelectViewModel()
         {
-            OpenCollection = new Command<Models.Collection>((Models.Collection collection) => {
+            OpenCollection = new Command<Models.Collection>(collection => {
                 Shell.Current.GoToAsync($"//Learn?id={collection.Id}");
             });
             Collections = Singleton.Storage.Collections;

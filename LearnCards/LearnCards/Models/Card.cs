@@ -9,6 +9,6 @@ namespace LearnCards.Models
     {
         public string Field1 { get; set; }
         public string Field2 { get; set; }
-        public int id { get; set; }
+        public int Id { get; set; }
     }
 }

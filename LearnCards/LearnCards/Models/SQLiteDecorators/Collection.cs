@@ -6,7 +6,7 @@ using SQLite;
 namespace LearnCards.Models.SQLiteDecorators
 {
     [Table("Colections")]
-    public class SQLiteCollection
+    public class SqLiteCollection
     {
         [PrimaryKey, Column("_id")]
         public int Id { get; set; }

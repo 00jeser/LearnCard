@@ -13,35 +13,35 @@ namespace LearnCards.ViewModels
 {
     internal class CollectionsListViewModel : ViewModelBase
     {
-        private ObservableCollection<Models.Collection> collections;
-        public ObservableCollection<Models.Collection> Collections { get => collections; set { collections = value; OnPropertyChanged(); } }
+        private ObservableCollection<Models.Collection> _collections;
+        public ObservableCollection<Models.Collection> Collections { get => _collections; set { _collections = value; OnPropertyChanged(); } }
 
 
-        private Command doAdd;
-        public Command DoAdd { get => doAdd; set { doAdd = value; OnPropertyChanged(); } }
-        private Command doMinus;
-        public Command DoMinus { get => doMinus; set { doMinus = value; OnPropertyChanged(); } }
-        private Command doAddShow;
-        public Command DoAddShow { get => doAddShow; set { doAddShow = value; OnPropertyChanged(); } }
-        private Command doMinusShow;
-        public Command DoMinusShow { get => doMinusShow; set { doMinusShow = value; OnPropertyChanged(); } }
+        private Command _doAdd;
+        public Command DoAdd { get => _doAdd; set { _doAdd = value; OnPropertyChanged(); } }
+        private Command _doMinus;
+        public Command DoMinus { get => _doMinus; set { _doMinus = value; OnPropertyChanged(); } }
+        private Command _doAddShow;
+        public Command DoAddShow { get => _doAddShow; set { _doAddShow = value; OnPropertyChanged(); } }
+        private Command _doMinusShow;
+        public Command DoMinusShow { get => _doMinusShow; set { _doMinusShow = value; OnPropertyChanged(); } }
 
-        private Command<Models.Collection> openCollection;
-        public Command<Models.Collection> OpenCollection { get => openCollection; set { openCollection = value; OnPropertyChanged(); } }
+        private Command<Models.Collection> _openCollection;
+        public Command<Models.Collection> OpenCollection { get => _openCollection; set { _openCollection = value; OnPropertyChanged(); } }
 
         public List<string> NamesList { get => Collections.Select(x => x.Name).ToList(); }
 
-        private bool showMinus;
-        public bool ShowMinus { get => showMinus; set { showMinus = value; OnPropertyChanged();} }
+        private bool _showMinus;
+        public bool ShowMinus { get => _showMinus; set { _showMinus = value; OnPropertyChanged();} }
 
-        private int minusIndex;
-        public int MinusIndex { get => minusIndex; set { minusIndex = value; OnPropertyChanged(); } }
+        private int _minusIndex;
+        public int MinusIndex { get => _minusIndex; set { _minusIndex = value; OnPropertyChanged(); } }
 
-        private bool addShow;
-        public bool AddShow { get => addShow; set { addShow = value; OnPropertyChanged();} }
+        private bool _addShow;
+        public bool AddShow { get => _addShow; set { _addShow = value; OnPropertyChanged();} }
 
-        private string addName;
-        public string AddName { get => addName; set { addName = value; OnPropertyChanged(); } }
+        private string _addName;
+        public string AddName { get => _addName; set { _addName = value; OnPropertyChanged(); } }
 
         public CollectionsListViewModel()
         {
@@ -53,13 +53,13 @@ namespace LearnCards.ViewModels
             });
             DoAdd = new Command(() =>
             {
-                if (string.IsNullOrWhiteSpace(addName))
+                if (string.IsNullOrWhiteSpace(_addName))
                     return;
                 AddShow = false;
                 Models.Collection c = new Models.Collection()
                 {
-                    Id = Singleton.Storage.generateId(),
-                    Name = addName,
+                    Id = Singleton.Storage.GenerateId(),
+                    Name = _addName,
                     Cards = new Dictionary<Models.Card, int>()
                 };
                 Singleton.Storage.AddCollection(c);
@@ -72,13 +72,13 @@ namespace LearnCards.ViewModels
             });
             DoMinus = new Command(() =>
             {
-                if (minusIndex == -1)
+                if (_minusIndex == -1)
                     return;
                 ShowMinus = false;
-                Singleton.Storage.DeleteCollectionById(collections[minusIndex].Id);
+                Singleton.Storage.DeleteCollectionById(_collections[_minusIndex].Id);
             });
 
-            OpenCollection = new Command<Models.Collection>((Models.Collection o) => {
+            OpenCollection = new Command<Models.Collection>(o => {
                 Shell.Current.GoToAsync($"//Edit?id={o.Id}");
             });
         }

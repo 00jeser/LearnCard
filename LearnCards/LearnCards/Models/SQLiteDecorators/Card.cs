@@ -6,26 +6,26 @@ using SQLite;
 namespace LearnCards.Models.SQLiteDecorators
 {
     [Table("Cards")]
-    public class SQLiteCard
+    public class SqLiteCard
     {
         public string Field1 { get; set; }
         public string Field2 { get; set; }
-        public int count { get; set; }
-        public int CollectionID { get; set; }
+        public int Count { get; set; }
+        public int CollectionId { get; set; }
 
         [PrimaryKey, Column("_id")]
-        public int id { get; set; }
+        public int Id { get; set; }
 
-        public SQLiteCard() { }
-        public SQLiteCard(Card card) 
+        public SqLiteCard() { }
+        public SqLiteCard(Card card) 
         { 
             Field1 = card.Field1; 
             Field2 = card.Field2;
-            id = card.id;
+            Id = card.Id;
         }
         public Card GetCard()
         {
-            return new Card() { Field1 = Field1, Field2 = Field2, id = id };
+            return new Card() { Field1 = Field1, Field2 = Field2, Id = Id };
         }
     }
 }

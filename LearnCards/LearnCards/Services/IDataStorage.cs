@@ -28,7 +28,7 @@ namespace LearnCards.Services
 
         void AddCard(Collection collection, Card card);
 
-        int generateId();
+        int GenerateId();
 
         void SaveCard(Collection collection, Card card);
         void SaveCardsInCollectionCollection(Collection collection);

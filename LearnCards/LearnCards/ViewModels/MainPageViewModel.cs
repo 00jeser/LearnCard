@@ -25,8 +25,8 @@ namespace LearnCards.ViewModels
         private SelectionMode _selectionMode = SelectionMode.Single;
         public SelectionMode SelectionMode { get => _selectionMode; set { _selectionMode = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<object> selectedCollections;
-        public ObservableCollection<object> SelectedCollections { get => selectedCollections; set { selectedCollections = value; OnPropertyChanged(); } }
+        private ObservableCollection<object> _selectedCollections;
+        public ObservableCollection<object> SelectedCollections { get => _selectedCollections; set { _selectedCollections = value; OnPropertyChanged(); } }
 
         public object SelectedCollection
         {
@@ -38,26 +38,26 @@ namespace LearnCards.ViewModels
         }
 
 
-        private string addName;
+        private string _addName;
         public string AddName
         {
-            get { return addName; }
-            set { addName = value; OnPropertyChanged(); }
+            get { return _addName; }
+            set { _addName = value; OnPropertyChanged(); }
         }
 
-        private bool addShow;
+        private bool _addShow;
         public bool AddShow
         {
-            get { return addShow; }
-            set { addShow = value; OnPropertyChanged(); }
+            get { return _addShow; }
+            set { _addShow = value; OnPropertyChanged(); }
         }
 
-        private bool showDelButton;
+        private bool _showDelButton;
 
         public bool ShowDelButton
         {
-            get { return showDelButton; }
-            set { showDelButton = value; OnPropertyChanged(); }
+            get { return _showDelButton; }
+            set { _showDelButton = value; OnPropertyChanged(); }
         }
 
 
@@ -79,13 +79,13 @@ namespace LearnCards.ViewModels
 
             DoAdd = new Command(() =>
             {
-                if (string.IsNullOrWhiteSpace(addName))
+                if (string.IsNullOrWhiteSpace(_addName))
                     return;
                 AddShow = false;
                 Models.Collection c = new Models.Collection()
                 {
-                    Id = Singleton.Storage.generateId(),
-                    Name = addName,
+                    Id = Singleton.Storage.GenerateId(),
+                    Name = _addName,
                     Cards = new Dictionary<Models.Card, int>()
                 };
                 Singleton.Storage.AddCollection(c);
@@ -105,7 +105,7 @@ namespace LearnCards.ViewModels
                 AddShow = true;
             });
 
-            LongPressCommand = new Command<Models.Collection>((Models.Collection col) =>
+            LongPressCommand = new Command<Models.Collection>(col =>
             {
                 SelectedCollections.Clear();
                 SelectedCollections.Add(col);

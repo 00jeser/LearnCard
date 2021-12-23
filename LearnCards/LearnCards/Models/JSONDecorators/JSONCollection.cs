@@ -4,10 +4,10 @@ using System.Text;
 
 namespace LearnCards.Models.JSONDecorators
 {
-    public class JSONCollection
+    public class JsonCollection
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<JSONCard> Cards { get; set; }
+        public List<JsonCard> Cards { get; set; }
     }
 }
