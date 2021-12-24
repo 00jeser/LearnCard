@@ -5,16 +5,18 @@
              x:Class="LearnCards.Views.StatisticsPage"
              Shell.NavBarIsVisible="False">
     <ContentPage.Content>
-        <Grid HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="200" HeightRequest="300">
+        <Grid HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="200" HeightRequest="450">
             <Grid.RowDefinitions>
-                <RowDefinition Height="120"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <plugin:ProgressRing Grid.Row="1" ScaleX="-1" x:Name="ring" RingProgressColor="{AppThemeBinding Dark=white, Default=black}" RingBaseColor="Gray"/>
             <Label Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" x:Name="lbl"/>
-            <controls:AutoSizedLabel HorizontalOptions="Fill" VerticalOptions="Fill" x:Name="nameLabel" HorizontalTextAlignment="Center"/>
+            <Label FontSize="40" HorizontalOptions="Center" WidthRequest="200" VerticalOptions="Fill" x:Name="nameLabel" HorizontalTextAlignment="Center"/>
             <Button Text="Далее" Grid.Row="2" Clicked="Button_Clicked"/>
+            <Button Text="Главная" Grid.Row="3" Clicked="GoToMainPage"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

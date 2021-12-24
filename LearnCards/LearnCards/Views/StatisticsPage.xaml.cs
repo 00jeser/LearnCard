@@ -63,5 +63,10 @@ namespace LearnCards.Views
         {
             Shell.Current.GoToAsync($"//Learn?id={id}");
         }
+
+        private void GoToMainPage(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//Main");
+        }
     }
 }
