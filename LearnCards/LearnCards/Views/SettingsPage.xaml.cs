@@ -16,5 +16,11 @@ namespace LearnCards.Views
         {
             InitializeComponent();
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            Shell.Current.GoToAsync("//Main");
+            return true;
+        }
     }
 }
