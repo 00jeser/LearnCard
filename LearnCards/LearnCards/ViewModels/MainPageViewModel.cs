@@ -66,7 +66,7 @@ namespace LearnCards.ViewModels
 
         public MainPageViewModel()
         {
-            Collections = Singleton.Storage.GetCollections();
+            Collections = DBSingleton.Storage.GetCollections();
             SelectedCollections = new ObservableCollection<object>();
 
             SelectionChange = new Command(() =>
@@ -86,11 +86,11 @@ namespace LearnCards.ViewModels
                 AddShow = false;
                 Models.Collection c = new Models.Collection()
                 {
-                    Id = Singleton.Storage.GenerateId(),
+                    Id = DBSingleton.Storage.GenerateId(),
                     Name = _addName,
                     Cards = new Dictionary<Models.Card, int>()
                 };
-                Singleton.Storage.AddCollection(c);
+                DBSingleton.Storage.AddCollection(c);
                 AddName = "";
             });
 
@@ -98,7 +98,7 @@ namespace LearnCards.ViewModels
             {
                 foreach(var c in SelectedCollections)
                 {
-                    Singleton.Storage.DeleteCollectionById((c as Models.Collection).Id);
+                    DBSingleton.Storage.DeleteCollectionById((c as Models.Collection).Id);
                 }
             });
 

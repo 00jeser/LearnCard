@@ -22,7 +22,7 @@ namespace LearnCards.Views
             set
             {
                 _id = value;
-                nameLabel.Text = Singleton.Storage.GetCollectionById(int.Parse(value)).Name;
+                nameLabel.Text = DBSingleton.Storage.GetCollectionById(int.Parse(value)).Name;
             }
             get => _id;
         }

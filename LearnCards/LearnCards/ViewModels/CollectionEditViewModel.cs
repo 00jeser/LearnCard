@@ -47,7 +47,7 @@ namespace LearnCards.ViewModels
             Delete = new Command<Models.Card>(card =>
             {
                 //Collection.Cards.Remove(card);
-                Singleton.Storage.DeleteCardById(Collection, card.Id);
+                DBSingleton.Storage.DeleteCardById(Collection, card.Id);
                 OnPropertyChanged(nameof(Cards));
             });
             DoAddShow = new Command<Models.Card>(card =>
@@ -60,9 +60,9 @@ namespace LearnCards.ViewModels
                 {
                     Field1 = InputField1,
                     Field2 = InputField2,
-                    Id = Singleton.Storage.GenerateId()
+                    Id = DBSingleton.Storage.GenerateId()
                 };
-                Singleton.Storage.AddCard(Collection, card);
+                DBSingleton.Storage.AddCard(Collection, card);
                 OnPropertyChanged(nameof(Cards));
                 AddShow = false;
                 InputField1 = String.Empty;

@@ -12,7 +12,7 @@ namespace LearnCards.Services.SQLite
         SQLiteConnection _database;
         public CollectionsRepository()
         {
-            _database = Singleton.SqLiteDatabase;
+            _database = DBSingleton.SqLiteDatabase;
             _database.CreateTable<SqLiteCollection>();
         }
 

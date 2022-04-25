@@ -33,7 +33,7 @@ namespace LearnCards.ViewModels
         private int _max;
         public LearnViewModel(int id)
         {
-            Collection = Singleton.Storage.GetCollectionById(id);
+            Collection = DBSingleton.Storage.GetCollectionById(id);
             if (NeedUpdateAmo())
             {
                 var cards = Collection.Cards.Keys.ToList();
@@ -41,7 +41,7 @@ namespace LearnCards.ViewModels
                 {
                     Collection.Cards[cards[i]] = 0;
                 }
-                Singleton.Storage.SaveCardsInCollectionCollection(Collection);
+                DBSingleton.Storage.SaveCardsInCollectionCollection(Collection);
             }
             var r = new Random();
             TempCards = new ObservableCollection<Models.Card>(Collection.Cards.Keys.OrderBy(x => r.Next()).Where(x => Collection.Cards[x] < Preferences.Get("LearnCount", 3d)).Take(5));
@@ -49,7 +49,7 @@ namespace LearnCards.ViewModels
             {
                 TempCards.Remove(c);
                 Collection.Cards[c] += 1;
-                Singleton.Storage.SaveCard(Collection, c);
+                DBSingleton.Storage.SaveCard(Collection, c);
                 _done++;
                 _max++;
                 if (TempCards.Count == 0)

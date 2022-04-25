@@ -11,7 +11,7 @@ namespace LearnCards
 
         public App()
         {
-            Singleton.Init();
+            DBSingleton.Init();
             InitializeComponent();
             MainPage = new AppShell();
         }

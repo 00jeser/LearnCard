@@ -19,7 +19,7 @@ namespace LearnCards.Views
         {
             set
             {
-                BindingContext = new CollectionEditViewModel(Singleton.Storage.GetCollectionById(int.Parse(value)));
+                BindingContext = new CollectionEditViewModel(DBSingleton.Storage.GetCollectionById(int.Parse(value)));
             }
         }
         public EditCollectionPage()
