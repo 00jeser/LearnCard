@@ -7,11 +7,15 @@
 
   <ItemGroup>
     <None Remove="back.png" />
+    <None Remove="Images\settings-black.png" />
+    <None Remove="Images\settings-white.png" />
     <None Remove="Images\trash-can-black.png" />
     <None Remove="Images\trash-can-white.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Images\settings-black.png" />
+    <EmbeddedResource Include="Images\settings-white.png" />
     <EmbeddedResource Include="Images\trash-can-black.png" />
     <EmbeddedResource Include="Images\trash-can-white.png" />
   </ItemGroup>
@@ -41,6 +45,9 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LearnPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SettingsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\StatisticsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

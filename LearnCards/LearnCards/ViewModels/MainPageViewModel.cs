@@ -21,6 +21,8 @@ namespace LearnCards.ViewModels
         public Command DoShowAdd { get; set; }
         public Command LongPressCommand { get; set; }
         public Command SelectionChange { get; set; }
+        
+        public Command DoOpenSettings { get; set; }
 
         private SelectionMode _selectionMode = SelectionMode.Single;
         public SelectionMode SelectionMode { get => _selectionMode; set { _selectionMode = value; OnPropertyChanged(); } }
@@ -111,6 +113,10 @@ namespace LearnCards.ViewModels
                 SelectedCollections.Add(col);
                 SelectionMode = SelectionMode == SelectionMode.Single ? SelectionMode.Multiple : SelectionMode.Single;
                 ShowDelButton = SelectionMode == SelectionMode.Multiple;
+            });
+
+            DoOpenSettings = new Command(() => {
+                Shell.Current.GoToAsync("//Settings");
             });
         }
 

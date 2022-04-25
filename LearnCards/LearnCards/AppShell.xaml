@@ -38,4 +38,7 @@
     <TabBar>
         <ShellContent Route="Done" ContentTemplate="{DataTemplate local:DonePage}" />
     </TabBar>
+    <TabBar>
+        <ShellContent Route="Settings" ContentTemplate="{DataTemplate local:SettingsPage}" />
+    </TabBar>
 </Shell>

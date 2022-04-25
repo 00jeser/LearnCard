@@ -13,6 +13,9 @@
                                      />
 
         <ToolbarItem Text="+" Command="{Binding DoShowAdd}"/>
+        <ToolbarItem IconImageSource="{AppThemeBinding Dark={extensions:ImageResourceExtension LearnCards.Images.settings-white.png}, Default={extensions:ImageResourceExtension LearnCards.Images.settings-black.png}}"
+                                     Command="{Binding DoOpenSettings}"
+                                     />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>

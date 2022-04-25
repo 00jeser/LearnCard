@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:vm="clr-namespace:LearnCards.ViewModels"
+             x:Class="LearnCards.Views.SettingsPage"
+             Visual="Material"
+             >
+    <Shell.TitleView>
+        <Label Text="Настройки" FontSize="17" VerticalTextAlignment="Center" VerticalOptions="Center" TextColor="{AppThemeBinding Light=black, Dark=white}"/>
+    </Shell.TitleView>
+    <ContentPage.BindingContext>
+        <vm:SettingsViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Количество Повторений: "/>
+                <Label BindingContext="{x:Reference Name=learnCountSteper}" Text="{Binding Path=Value}"/>
+            </StackLayout>
+            <Stepper x:Name="learnCountSteper" Value="{Binding LearnCount}" Minimum="1" Maximum="10"/>
+            <BoxView BackgroundColor="Transparent" HeightRequest="50"/>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Показывать сначала первую сторону карточки"/>
+                <Switch HorizontalOptions="Start" Margin="5" IsToggled="{Binding IsFrontSide}"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

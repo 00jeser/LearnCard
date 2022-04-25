@@ -26,6 +26,7 @@ namespace LearnCards.Views
 
         protected override bool OnBackButtonPressed()
         {
+            (BindingContext as MainPageViewModel).AddShow = false;
             return true;
         }
     }
