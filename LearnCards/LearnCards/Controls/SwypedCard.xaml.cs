@@ -27,7 +27,8 @@ namespace LearnCards.Controls
             set
             {
                 SetValue(Field1Property, value);
-                lab.Text = value;
+                if (Preferences.Get("IsFrontSide", true))
+                    lab.Text = value;
                 _field1 = value;
             }
         }
@@ -49,7 +50,8 @@ namespace LearnCards.Controls
             set
             {
                 SetValue(Field2Property, value);
-                lab.Text = value;
+                if (!Preferences.Get("IsFrontSide", true))
+                    lab.Text = value;
                 _field2 = value;
             }
         }

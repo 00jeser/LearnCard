@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LearnCards.ViewModels
@@ -43,7 +44,7 @@ namespace LearnCards.ViewModels
                 Singleton.Storage.SaveCardsInCollectionCollection(Collection);
             }
             var r = new Random();
-            TempCards = new ObservableCollection<Models.Card>(Collection.Cards.Keys.OrderBy(x => r.Next()).Where(x => Collection.Cards[x] < 3).Take(5));
+            TempCards = new ObservableCollection<Models.Card>(Collection.Cards.Keys.OrderBy(x => r.Next()).Where(x => Collection.Cards[x] < Preferences.Get("LearnCount", 3d)).Take(5));
             Right = new Command<Models.Card>(c =>
             {
                 TempCards.Remove(c);
