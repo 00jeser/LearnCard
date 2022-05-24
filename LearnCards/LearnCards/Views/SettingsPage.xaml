@@ -28,7 +28,7 @@
             <BoxView BackgroundColor="Transparent" HeightRequest="50"/>
             <StackLayout Orientation="Horizontal">
                 <Label Text="Показывать сначала первую сторону карточки"/>
-                <Switch HorizontalOptions="Start" Margin="5" IsToggled="{Binding IsFrontSide}"/>
+                <CheckBox HorizontalOptions="Start" Margin="5" Color="{AppThemeBinding Dark=white, Default=black}" IsChecked="{Binding IsFrontSide}"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

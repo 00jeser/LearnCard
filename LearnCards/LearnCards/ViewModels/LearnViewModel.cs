@@ -71,7 +71,7 @@ namespace LearnCards.ViewModels
         {
             foreach (var card in Collection.Cards.Keys)
             {
-                if (Collection.Cards[card] < 3)
+                if (Collection.Cards[card] < Preferences.Get("LearnCount", 3d))
                     return false;
             }
             return true;
